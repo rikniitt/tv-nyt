@@ -1,0 +1,29 @@
+<h2>
+  <i class="glyphicon glyphicon-cog"></i>
+  Asetukset
+</h2>
+
+<hr />
+
+<p class="text-muted">
+    Muokkaa näyttettäviä kanavia ja niiden järjestystä.
+</p>
+
+<hr />
+
+<div ng-contoroller="SettingsCtrl">    
+    <div class="row">
+        <div class="col-md-4">
+
+            <ul ui-sortable="sortableOptions" ng-model="channelList" id="channel-list">
+                <li ng-repeat="channel in channelList" ng-class="{disabled: channel.disabled}">
+                    #{{ $index+1 }} {{ channel.name }}
+                    <button type="button" class="btn btn-default pull-right" ng-click="disableToggle(channel)">
+                        <i class="glyphicon" ng-class="{false: 'glyphicon-eye-close' , true: 'glyphicon-eye-open'}[channel.disabled]"></i>
+                    </button>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>

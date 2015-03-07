@@ -1,23 +1,28 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div ng-contoroller="MainCtrl">
+    <div class="channel-container" ui-sortable="sortableOptions" ng-model="channels">
+        <div class="row" ng-repeat="row in channels.rows">
+            <div class="col-md-{{ colSize }} channel-col" ng-repeat="channel in row">
+                <h2>
+                    {{ channel.channelname }}
+                    <button class="btn btn-default btn-xs pull-right" type="button" ng-click="collapseToggle(channel)">
+                       <span class="glyphicon" ng-class="{true: 'glyphicon-menu-down', false: 'glyphicon-menu-up'}[channel.collapsed]"></span>
+                    </button>
+                </h2>
+                <ul>
+                    <li ng-repeat="program in channel.programs" ng-hide="program.hidden" ng-click="detailsToggle(program)">
+                        {{ program.simple_start_time }} {{ program.name | urlDecode }}
+                        <div ng-show="program.details && !program.details.collapsed">
+                            {{ program.details.short_text | urlDecode }}
+                            {{ program.details.description | urlDecode }}
+                            <dl class="dl-horizontal">
+                                <dt>Kesto</dt><dd>{{ program.details.flength }}</dd>
+                                <dt>Alkaa</dt><dd>{{ program.details.start_time }}</dd>
+                                <dt>Loppuu</dt><dd>{{ program.details.end_time }}</dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
